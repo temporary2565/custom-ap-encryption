@@ -1,0 +1,60 @@
+@import "styles/theme.scss";
+@import "styles/reset.scss";
+@import "styles/elements.scss";
+@import "../node_modules/npm-font-open-sans/open-sans.css";
+
+body, html {
+    height: 100%;
+    background-color: $app-bg;
+    color: $app-fg;
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
+}
+
+i {font-style: italic}
+
+.menu {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    text-align: center;
+    > li {
+        display:flex;
+        > a {
+            margin: auto;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.8s ease-out;
+        padding: 16px;
+        padding-bottom: 6px;
+        border-bottom: 4px solid transparent;}
+        >a:hover, a:focus, .highlighted {
+            border-bottom: 4px solid $app-hl;
+        }
+    }
+}
+
+.wrapper {
+    display: flex;
+    height: calc(100vh - 53px);
+}
+
+.content {
+    margin: auto;
+    width: 90%;
+    text-align: center;
+}
+
+.login {
+    margin: auto;
+    width: 90%;
+    
+    >form{text-align: center;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1.2fr;
+grid-gap: 24px;
+    >button, input {
+        width: 40%;
+        margin: 0 auto;
+    }
+}
+}
+

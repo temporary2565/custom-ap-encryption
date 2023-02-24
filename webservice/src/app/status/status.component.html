@@ -1,0 +1,124 @@
+<div class="subbar"> </div>
+<div class="content-wrapper">
+  <div class="status" *ngIf="_loginService.hasStatus">
+    <div class="connection">
+      <div class="connection-grid">
+        <div class="connection-item connection-internet">
+          <div *ngIf="getNetworkMap('internet', 'value'); then internet else internetelse"></div>
+          <ng-template #internet>
+            <img src="assets/internet.png" width="50" height="50"><br>
+            <span class="connection-label"> Připojeno k internetu </span>
+          </ng-template>
+          <ng-template #internetelse>
+              <img src="assets/internet-disabled.png" width="50" height="50"><br>
+              <span class="connection-label"> Nepřipojeno k internetu </span>
+          </ng-template>
+        </div>
+        <div [ngClass]="{ 'connection-wire':true, 'connection-wire-disabled':(!getNetworkMap('internet', 'value') || !getNetworkMap('network', 'value')) }">
+        </div>
+        <div class="connection-item connection-network">
+          <div *ngIf="getNetworkMap('network', 'value'); then network else networkelse"></div>
+          <ng-template #network>
+              <img src="assets/network.png" width="50" height="50"><br>
+              <span class="connection-label"> Síť: {{ getNetworkMap('network', 'type') }} (funkční) </span>
+          </ng-template>
+          <ng-template #networkelse>
+              <img src="assets/network-disabled.png" width="50" height="50"><br>
+              <span class="connection-label"> Síť: {{ getNetworkMap('network', 'type') }} (nefunkční) </span>
+          </ng-template>
+        </div>
+        <div [ngClass]="{ 'connection-wire':true, 'connection-wire-disabled':(!getNetworkMap('wifi', 'value') || !getNetworkMap('network', 'value')) }">
+        </div>
+        <div class="connection-item connection-wifi">
+          <div *ngIf="getNetworkMap('wifi', 'value'); then wifi else wifielse"></div>
+          <ng-template #wifi>
+            <img src="assets/wireless.png" width="50" height="50"><br>
+              <span class="connection-label"> Wifi aktivní: {{ getNetworkMap('wifi', 'ssid') }} </span>
+          </ng-template>
+          <ng-template #wifielse>
+              <img src="assets/wireless-disabled.png" width="50" height="50"><br>
+              <span class="connection-label"> Wifi neaktivní </span>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <div class="security">
+      <div class="security-grid">
+        <div class="security-item security-beacons">
+            <div *ngIf="getNetworkMap('beacons', 'value'); then beacons else beaconselse"></div>
+            <ng-template #beacons>
+              <img src="assets/beacons.png" width="50" height="50"><br>
+                <span class="security-label"> Počet beaconů: {{ getNetworkMap('beacons', 'count') }} </span>
+            </ng-template>
+            <ng-template #beaconselse>
+                <img src="assets/beacons-disabled.png" width="50" height="50"><br>
+                <span class="security-label"> Beacon nepřidán </span>
+            </ng-template>
+        </div>
+        <div class="security-item security-encryption">
+            <div *ngIf="getNetworkMap('encryption', 'value'); then encryption else encryptionselse"></div>
+            <ng-template #encryption>
+              <img src="assets/encryption.png" width="50" height="50"><br>
+                <span class="security-label">
+                  Typ zabezpečení: {{ getNetworkMap('encryption', 'type') }}
+                  <span class="security-warning" *ngIf="getNetworkMap('encryption', 'type') == 'WPA2-PSK'">
+                    <br> Pro lepší zabezpečení zvolte metodu projekt
+                  </span>
+                </span>
+            </ng-template>
+            <ng-template #encryptionselse>
+                <img src="assets/encryption-disabled.png" width="50" height="50"><br>
+                <span class="security-label"> Nezabezpečeno </span>
+                <span class="security-warning">
+                  <br> Prosím nastavte zabezpečení v nastavení
+                </span>
+            </ng-template>
+        </div>
+      </div>
+    </div>
+    <div class="usage">
+      <table class="usage-table">
+        <tr>
+          <td colspan="2"  class="usage-label"> Využítí dat </td>
+        </tr>
+        <tr class="usage-row">
+          <td class="usage-cell usage-label-cell">
+            Denní: 
+          </td>
+          <td class="usage-cell">
+            {{ getNetworkMap('average', 'daily') }} (dnes {{ getNetworkMap('immediate', 'daily') }})
+          </td>
+        </tr>
+        <tr class="usage-row">
+          <td class="usage-cell usage-label-cell">
+            Týdenní: 
+          </td>
+          <td class="usage-cell">
+            {{ getNetworkMap('average', 'weekly') }} (tento týden {{ getNetworkMap('immediate', 'weekly') }})
+          </td>
+        </tr>
+        <tr class="usage-row">
+          <td class="usage-cell usage-label-cell">
+            Měsíční: 
+          </td>
+          <td class="usage-cell">
+            {{ getNetworkMap('average', 'monthly') }} (tento měsíc {{ getNetworkMap('immediate', 'monthly') }})
+          </td>
+        </tr>
+      </table>
+      <table class="usage-table">
+        <tr>
+          <td colspan="2" class="usage-label"> Omezení využítí dat </td>
+        </tr>
+        <tr class="usage-row">
+          <td class="usage-cell usage-label-cell">
+            Stav omezení: 
+          </td>
+          <td class="usage-cell">
+            Neomezeno
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

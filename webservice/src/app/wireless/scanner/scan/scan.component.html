@@ -1,0 +1,105 @@
+<ul class="beacons-list">
+  <ng-container *ngIf="beaconsArr.length == 0; else beaconsFound">
+    <div class="beacons-notfound"><span> {{ (saved) ? 'Nebyla uložena žádná zařízení' : 'Nepodařilo se najít žádná okolní zařízení' }} </span></div>
+  </ng-container>
+  <ng-template #beaconsFound>
+    <li class="beacons-item" *ngFor="let item of beaconsArr" [class.hidden]="!(beacons[item]['protocol'] == 'eddystone-uid' || beacons[item]['protocol'] == 'ibeacon')">
+        <div class="beacons-subitem beacons-header" [ngClass]="[((!saved) ? ('proximity-'+beacons[item]['properties']['proximity']) : 'proximity-unknown')]">
+          <ng-container *ngIf="!saved;else proximityElse">
+            <ng-container [ngSwitch]="beacons[item]['properties']['proximity']">
+              <ng-container *ngSwitchCase="'far'">Daleko</ng-container>
+              <ng-container *ngSwitchCase="'near'">Blíže</ng-container>
+              <ng-container *ngSwitchCase="'immediate'">Blízko</ng-container>
+              <ng-container *ngSwitchCase="'unknown'">(RSSI: {{ beacons[item]['properties']['rssi'] }} dbm)</ng-container>
+            </ng-container>
+          </ng-container>
+          <ng-template #proximityElse> Uložen </ng-template>
+        </div>
+        <div class="beacons-subitem beacons-icon"><img src="assets/beacons.png" width="50" height="50"></div>
+        <div class="beacons-subitem beacons-type">
+          <ng-container [ngSwitch]="beacons[item]['protocol']">
+            <ng-container *ngSwitchCase="'ibeacon'">
+              iBeacon
+            </ng-container>
+            <ng-container *ngSwitchCase="'eddystone-uid'">
+              Eddystone UID
+            </ng-container>
+            <ng-container *ngSwitchCase="'eddystone-tlm'">
+              Eddystone TLM
+            </ng-container>
+            <ng-container *ngSwitchCase="'eddystone-url'">
+              Eddystone URL
+            </ng-container>
+            <ng-container *ngSwitchCase="'eddystone-eid'">
+              Eddystone EID
+            </ng-container>
+          </ng-container>
+        </div>
+        <div class="beacons-subitem beacons-properties">
+          <ng-container [ngSwitch]="beacons[item]['protocol']">
+            <ng-container *ngSwitchCase="'ibeacon'">
+              Minor: {{ beacons[item]['properties']['minor'] }}<br>
+              Major: {{ beacons[item]['properties']['major'] }}
+            </ng-container>
+            <ng-container *ngSwitchCase="'eddystone-uid'">
+              Označení: {{ beacons[item]['properties']['instance'] }}
+            </ng-container>
+            <ng-container *ngSwitchCase="'eddystone-tlm'">
+              Eddystone TLM
+            </ng-container>
+            <ng-container *ngSwitchCase="'eddystone-url'">
+              Eddystone URL
+            </ng-container>
+            <ng-container *ngSwitchCase="'eddystone-eid'">
+              Eddystone EID
+            </ng-container>
+          </ng-container><br>
+          <ng-container *ngIf="!saved">
+            <ng-container *ngIf="beacons[item]['protocol'].toString().split('-')[0] == 'eddystone' && isType(beacons[item]['properties']['distance']) == 'number'">
+              <ng-container>
+                Vzdálenost:
+                <ng-container *ngIf="beacons[item]['properties']['distance'] < 0.01;else distanceElse">
+                  {{ (beacons[item]['properties']['distance'] * 10000).toFixed(1) }} cm
+                </ng-container>
+                <ng-template #distanceElse>
+                  {{ (beacons[item]['properties']['distance'] * 100).toFixed(2) }} m
+                </ng-template>
+              </ng-container><br>
+            </ng-container>
+            RSSI: {{ beacons[item]['properties']['rssi'] }} dbm<br>
+          </ng-container>
+          <span class="beacons-uuid">
+            <ng-container *ngIf="saved; else uuidElse">
+              <ng-container [ngSwitch]="beacons[item]['protocol']">
+                <ng-container *ngSwitchCase="'ibeacon'">
+                  {{ beacons[item]['uuid'] }}
+                </ng-container>
+                <ng-container *ngSwitchCase="'eddystone-uid'">
+                  {{ beacons[item]['namespace'] }}
+                </ng-container>
+                <ng-container *ngSwitchCase="'eddystone-tlm'">
+                  {{ beacons[item]['uuid'] }}
+                </ng-container>
+                <ng-container *ngSwitchCase="'eddystone-url'">
+                  {{ beacons[item]['url'] }}
+                </ng-container>
+                <ng-container *ngSwitchCase="'eddystone-eid'">
+                  {{ beacons[item]['uuid'] }}
+                </ng-container>
+              </ng-container>
+            </ng-container>
+            <ng-template #uuidElse>
+              {{ item.toString().split(',')[0] }}
+            </ng-template>
+          </span>
+        </div>
+        <ng-container *ngIf="!isAlreadyAdded(item.split(',').concat((beacons[item]['protocol'] == 'eddystone-uid') ? [beacons[item].properties.instance] : []));else elseAddedButton">
+          <button class="beacons-button" *ngIf="!saved;else elseSavedButton" (click)="_loginService.addSavedBeacons(beacons[item], item)"> Přidat </button>
+          <ng-template #elseSavedButton><button class="beacons-button" (click)="_loginService.addSavedBeacons(beacons[item], (beacons[item]['protocol'] == 'ibeacon') ? beacons[item]['uuid'] : beacons[item]['namespace'], true)"> Odebrat </button></ng-template>
+        </ng-container>
+        <ng-template #elseAddedButton>
+          <div class="beacons-button beacons-button-disabled"> Přidáno </div>
+        </ng-template>
+    </li>
+  </ng-template>
+</ul>

@@ -1,0 +1,36 @@
+<div class="saved-wrapper">
+  <div class="saved-container">
+    <div class="saved-list-wrapper">
+      <ul class="saved-list" *ngIf="!isUndef(ipc.config) && !isUndef(ipc.config.saved) && ipc.config.saved.length > 0;else listElse">
+        <li *ngFor="let item of ipc.config.saved;index as i">
+          <div class="saved-list-icon">
+          <ng-container [ngSwitch]="item.type">
+            <ng-container *ngSwitchCase="0">
+              <img src="assets/open.png" width="32" height="32">
+            </ng-container>
+            <ng-container *ngSwitchCase="3">
+              <img src="assets/open-pairing.png" width="35" height="32">
+            </ng-container>
+            <ng-container *ngSwitchCase="1">
+              <img src="assets/personal.png" width="35" height="32">
+            </ng-container>
+            <ng-container *ngSwitchCase="2">
+              <img src="assets/enterprise.png" width="24" height="32">
+            </ng-container>
+          </ng-container>
+          </div>
+          <div class="saved-list-name">{{item.name}}</div>
+          <div class="saved-list-info">{{item.info}}</div>
+          <div class="saved-list-actions">
+            <button type="button" (click)="remove(item,index)">Odebrat</button>
+          </div>
+        </li>
+      </ul>
+      <ng-template #listElse>
+        <div class="saved-list-empty">
+          <span> Zatím nebyly uloženy žádné sítě </span>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

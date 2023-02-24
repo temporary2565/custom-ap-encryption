@@ -1,0 +1,26 @@
+<div class="wrapper login-wrapper">
+  <div class="content login">
+    <form onsubmit="return false;">
+    <div class="login-cold">
+      <span> Přihlásit se během připojení &nbsp;&nbsp; <label for="coldLoginC">---</label><input name="coldLoginC" id="coldLoginC" type="checkbox" (change)="coldLogin($event)"> </span>
+    </div>
+    </form>
+    <ng-container *ngIf="!auth.authenticated;else logOut">
+    <h5 class="login-caption">Přihlásit se</h5>
+    <form [formGroup]="loginForm" onsubmit="false">
+      <input type="text" formControlName="username" name="username" placeholder="E-mail">
+      <input type="text" formControlName="password" name="password" placeholder="Heslo">
+      <button type="button" (click)="onSubmit(false)">Přihlásit se</button>
+    </form>
+    <h5 class="login-caption">Token</h5>
+    <form [formGroup]="tokenForm" onsubmit="false">
+      <input type="text" formControlName="token" name="token" placeholder="Token">
+      <button type="button" (click)="onSubmit(true)">Přihlásit se přes token</button>
+    </form>
+    </ng-container>
+    <ng-template #logOut>
+        <h5 class="login-caption">Jste přihlášen jako {{auth.username}}</h5>
+        <div style="text-align: center"><button type="button" (click)="auth.logOut()">Odhlásit se</button></div>
+    </ng-template>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="settings-wrapper">
+    <div class="settings" *ngIf="_a.isLoggedIn; else settingsElse">
+        <div class="settings-caption">
+            <h2>Nastavení pro uživatele {{_a.username}}</h2>
+            <hr>
+        </div>
+        <span class="error" *ngIf="error"> Připojení k serveru je nestabilní, prosím zkontrolujte kvalitu vašeho internetového připojení </span>
+        <form [formGroup]="pwdForm" onsubmit="return false;">
+            <div class="settings-user">
+                <div class="settings-field">
+                    <label> Stav účtu: </label>
+                    <span> {{status}} </span>
+                </div>
+                <div class="settings-field">
+                    <h3 class="settings-field-caption"> Změna hesla </h3>
+                    <mat-form-field class="settings-pwd-input"><input matInput type="password" formControlName="old" placeholder="Staré heslo"></mat-form-field><br>
+                    <mat-form-field class="settings-pwd-input"><input matInput type="password" formControlName="new" placeholder="Nové heslo">
+                    <mat-error> Heslo by mělo obsahovat alespoň 5 znaků </mat-error></mat-form-field><br>
+                    <mat-form-field class="settings-pwd-input"><input matInput type="password" formControlName="r" placeholder="Zopakujte heslo"></mat-form-field><br>
+                    <button mat-flat-button color="primary" type="button" (click)="onSubmit()">Změnit heslo</button>
+                </div>
+            </div>
+        </form>
+            <div class="settings-tokens">
+                <mat-grid-list cols="3" rowHeight="40px">
+                    <ng-container *ngFor="let item of _a.serverConfig.tokens">
+                        <mat-grid-tile [title]="item.name">{{item.name}}</mat-grid-tile>
+                        <mat-grid-tile [title]="item.name">{{item.value}}</mat-grid-tile>
+                        <mat-grid-tile [title]="item.name"> <button color="primary" mat-flat-button (click)="rmToken(item.value)"> Odebrat </button></mat-grid-tile>
+                    </ng-container>
+                </mat-grid-list>
+                <mat-form-field><input matInput type="text" [(ngModel)]="keyName" placeholder="Jméno"></mat-form-field>
+                <button color="primary" mat-flat-button (click)="addToken()"> Přidat </button>
+            </div>
+    </div>
+    <ng-template #settingsElse>
+        <div class="settings-error">
+            <span>Načítání</span>
+        </div>
+    </ng-template>
+</div>

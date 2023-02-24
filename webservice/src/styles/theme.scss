@@ -1,0 +1,28 @@
+// Základní nastavení vzhledu
+
+$bg: #24363F;
+$transition: 0.4s ease-out;
+$color: #eee;
+$container-bg: rgba(71, 82, 86, 0.9);
+$container-width: 900px;
+
+$subbar-bg: $container-bg;
+$subbar-border: 1px solid #a0a0a0;
+$subbar-link-active: #f2cd00;
+$subbar-link-padding: 10px;
+
+$content-bg: #303C3F;
+
+$form-even-bg: #4b575c;
+$form-label-width: 200px;
+
+$modal-bg: $content-bg;
+$modal-content-bg: #475256;
+$modal-color: #eee;
+$modal-font-size: 12pt;
+
+$dmenu-bg: #475256;
+
+$notifier-button-green: #117711;
+$notifier-button-red: #8f3b12;
+$notifier-button-font-color: #f3f3f3;

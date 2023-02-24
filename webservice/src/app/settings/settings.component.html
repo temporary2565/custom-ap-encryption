@@ -1,0 +1,61 @@
+<a class="link-status" routerLink="" skipLocationChange> &lt;&minus; Zpět na úvodní stránku </a>
+<h1 class="content-heading"> {{ cfgStructure['desc'] }} </h1>
+<hr class="content-separator">
+<!-- Vytvoření formuláře -->
+<form ngNoForm name="subcategory" id="subcategory" method="get" action="/apply">
+  <input type="hidden" name="session" [value]="_loginService._sessionId">
+  <input type="hidden" name="subcategory" [value]="subcategory">
+  <table class="settings-table">
+    <tr *ngFor="let item of settingsStructure;even as i" [ngClass]="{'settings-row': true, 'settings-row-even': i}" [class.hidden]="_structureService.isHidden(category, subcategory, item)" [title]="cfgStructure['children'][item]['desc']">
+      <td class="settings-cell settings-label"> {{ cfgStructure['children'][item]['label'] }} </td>
+      <!-- Zjištění typu prvku formuláře -->
+      <td class="settings-cell settings-input-cell" [ngSwitch]="_formService.getType(cfgStructure, item)">
+        <span class="settings-input-inner" *ngSwitchCase="'textfield'">
+          <input type="text" [name]="item" [id]="item" [value]="_loginService.getDefault(item)" (change)="_validationService.validate(category, subcategory, item, $event)" [class.invalid]="!_validationService.isValid(item)">
+        </span>
+        <span class="settings-input-inner" *ngSwitchCase="'password'">
+            <input type="password" [name]="item" [id]="item" [value]="_loginService.getDefault(item)" (change)="_validationService.validate(category, subcategory, item, $event)" [class.invalid]="!_validationService.isValid(item)">
+          </span>
+        <span *ngSwitchCase="'select'">
+          <select [name]="item" [id]="item" (change)="_structureService.updateHiding($event)">
+            <option *ngFor="let option of _formService.selectCycle(cfgStructure, item)" [value]="option" [selected]="(_loginService.defaultConfig[item] == option)"> {{ cfgStructure['children'][item]['select']['children'][option]['label'] }} </option>
+          </select>
+        </span>
+        <span *ngSwitchCase="'checkbox'">
+          <input type="checkbox" [checked]="cfgStructure['children'][item]['checkbox']['default']"
+            [name]="item" [id]="item" [checked]="_loginService.defaultConfig[item]" (change)="_structureService.updateHiding('event', $event)">
+        </span>
+        <span *ngSwitchCase="'dummyselect'">
+          <select>
+            <option> {{ cfgStructure['children'][item]['dummyselect']['children']['option']['label'] }} </option>
+          </select>
+        </span>
+        <span *ngSwitchCase="'selectrange'">
+          <select [name]="item" [id]="item">
+            <option *ngFor="let option of _formService.selectRange(cfgStructure, item)" [value]="option" [selected]="(_loginService.defaultConfig[item] == option)"> 
+              {{ _formService.getSelectRangeLabel(cfgStructure, item, option) }}
+            </option>
+          </select>
+        </span>
+        <span *ngSwitchCase="'array'">
+          <span *ngFor="let subitem of _formService.dnsArr;index as j"><input type="text" [name]="item + '-' + j" [id]="item + '-' + j" [value]="subitem"><br></span>
+          <button type="button" class="settings-array-button" (click)="_formService.updateArray('add')"> add </button>
+          <button type="button" class="settings-array-button" (click)="_formService.updateArray('remove')"> remove </button>
+        </span>
+        <span *ngSwitchCase="'modal'">
+          <button type="button" class="settings-link-btn settings-modal-btn" (click)="showModal(item)"> Nastavit </button>      
+        </span>
+        <span *ngSwitchCase="'dhcprange'">
+          <input type="text" [name]="item+'0'" [id]="item+'0'" [value]="_loginService.getDefault(item+'0')" (change)="_validationService.validate(category, subcategory, item, $event)" [class.invalid]="!_validationService.isValid(item)">
+          <input type="text" [name]="item+'1'" [id]="item+'1'" [value]="_loginService.getDefault(item+'1')" (change)="_validationService.validate(category, subcategory, item, $event)" [class.invalid]="!_validationService.isValid(item)">
+        </span>
+      </td>
+      <td class="settings-cell settings-range-cell">
+        <span class="settings-range-span" [class.hidden]="_validationService.isValid(item)"> {{ _validationService.getRangeDescription(category, subcategory, item) }} </span>
+      </td>
+    </tr>
+  </table>
+  <div class="settings-btn" [class.hidden]="_structureService.isBtnHidden(category, subcategory)">
+    <button type="submit" class="settings-submit" [disabled]="_validationService.isThereProblem()"> Změnit nastavení </button>
+  </div>
+</form>

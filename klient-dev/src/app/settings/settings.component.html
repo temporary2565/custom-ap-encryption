@@ -1,0 +1,74 @@
+<div class="wrapper settings-wrapper">
+	<div class="content settings">
+		<div class="status">
+			<span class="status-indicator">
+			</span>
+		</div>
+		<form [formGroup]="settingsForm">
+			<!-- <div class="section">
+				<h5 class="section-caption"> Základní </h5>
+				<div class="field-wrapper">
+					<label for="name">Jméno a příjmení: </label>
+					<span>
+						<input type="text" formControlName="name" name="name">
+					</span>
+				</div>
+				<div class="field-wrapper">
+					<label for="name">Email:</label>
+					<span>
+						<input type="text" formControlName="email" name="email">
+					</span>
+				</div>
+			</div> -->
+			<div class="section">
+				<span class="section-caption">Připojení</span>
+				<div class="field-wrapper">
+					<label for="server">Adresa serveru:</label>
+					<span>
+						<input type="text" formControlName="server" name="server">
+					</span>
+				</div>
+				<div class="field-wrapper">
+					<label for="interface">Bezdrátový adaptér:</label>
+					<span>
+						<select formControlName="interface" name="interface">
+							<option *ngFor="let subitem of ipc.interfaces" [value]="subitem">{{subitem}}</option>
+						</select>
+					</span>
+				</div>
+				<div class="field-wrapper">
+					<label for="token">Přihlašovací token:</label>
+					<span>
+						<input type="text" formControlName="token" name="token">
+					</span>
+				</div>
+			</div>
+			<!--<div class="section">
+				<span class="section-caption">Změna hesla</span>
+				<span class="section-desc">Pokud není potřeba, nechte prázdné.</span>
+				<div class="field-wrapper">
+					<label for="passwordOld">Staré heslo:</label>
+					<span>
+						<input type="text" formControlName="passwordOld" name="passwordOld">
+					</span>
+				</div>
+				<div class="field-wrapper">
+					<label for="password">Heslo:</label>
+					<span>
+						<input type="text" formControlName="password" name="password">
+					</span>
+				</div>
+				<div class="field-wrapper">
+					<label for="password2">Zopakujte heslo:</label>
+					<span>
+						<input type="text" formControlName="password2" name="password2">
+					</span>
+				</div>
+			</div>-->
+		</form>
+    <div class="actions">
+    <button (click)="onSubmit()"> Použít změny </button>
+  </div>
+	<div class="info">
+  </div>
+</div>

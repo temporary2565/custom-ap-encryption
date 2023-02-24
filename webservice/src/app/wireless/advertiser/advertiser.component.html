@@ -1,0 +1,80 @@
+<h1 class="content-heading"> Vytvoří nové beacony (iBeacon/Eddystone) </h1>
+<div class="beacons-error" [class.hidden]="!exceptions['ERR']">
+  <span> {{ errmsg }} </span>
+</div>
+<div class="beacons-success" [class.hidden]="!_loginService.successAdvertisedBeacons">
+  <span> Nastavení bylo změněno </span>
+</div>
+<div class="beacons-error" [class.hidden]="!_loginService.errorAdvertisedBeacons">
+  <span> Server odmítl změny (pravděpodobně přetížen, nízký signál) </span>
+</div>
+<hr class="content-separator">
+<div class="beacons-wrapper">
+  <div class="beacons-toolbar">
+    <h2> Přidat nebo odebrat becony </h2>
+    <div class="beacons-buttons">
+      <button class="beacons-button beacons-add" (click)="addBeacon()"> Přidat </button>
+      <button class="beacons-button beacons-update" (click)="update()"> Aktualizovat </button>
+    </div>
+  </div>
+  <ul class="beacons-list">
+    <ng-container *ngIf="beaconsArr.length == 0">
+        <div class="beacons-notfound"><span> Nejsou vysílány žádné beacony </span></div>
+    </ng-container>
+    <li class="beacons-item" *ngFor="let item of beaconsArr" [ngClass]="{'beacons-layout-ibeacon': (beacons[item]['type'] == 'ibeacon')}">
+      <div class="beacons-col beacons-type">
+          <label [for]="(beacons[item]['type'] == 'eddystone-uid') ? beacons[item]['namespace']+beacons[item]['instance']+',type' : beacons[item]['uuid']+'-'+beacons[item]['major']+'-'+beacons[item]['minor']+',type'"> Typ: </label>
+        <select style="width:117px" [name]="(beacons[item]['type'] == 'eddystone-uid') ? beacons[item]['namespace']+beacons[item]['instance']+',type' : beacons[item]['uuid']+'-'+beacons[item]['major']+'-'+beacons[item]['minor']+',type'" (change)="updateView($event, item)">
+          <option value="ibeacon" [selected]="beacons[item]['type'] == 'ibeacon'"> iBeacon </option>
+          <option value="eddystone-uid" [selected]="beacons[item]['type'] == 'eddystone-uid'"> Eddystone UID </option>
+        </select>
+      </div>
+      <ng-container *ngIf="beacons[item]['type'] == 'eddystone-uid';else typeElse">
+        <div class="beacons-col beacons-namespace">
+          <label [for]="beacons[item]['namespace']+beacons[item]['instance']+'-namespace'"> Identifikátor: </label>
+          <input style="width:150px" type="text" [name]="beacons[item]['namespace']+beacons[item]['instance']+',namespace'" [value]="beacons[item]['namespace']" (change)="checkField($event);updateView($event, item)" [class.invalid]="invalid.includes(beacons[item]['namespace']+beacons[item]['instance']+',namespace')">
+        </div>
+        <div class="beacons-col beacons-instance">
+          <label [for]="beacons[item]['namespace']+beacons[item]['instance']+',instance'"> Označení: </label>
+          <input style="width:100px" type="text" [name]="beacons[item]['namespace']+beacons[item]['instance']+',instance'" [value]="beacons[item]['instance']" (change)="checkField($event);updateView($event, item)">
+        </div>
+        <div class="beacons-col beacons-activate">
+          <span>
+            <input type="checkbox" [name]="beacons[item]['namespace']+beacons[item]['instance']+',active'" [checked]="beacons[item]['active']" (change)="updateView($event, item)">
+            <label [for]="beacons[item]['namespace']+beacons[item]['instance']+',active'"> Aktivní </label>
+            <input type="checkbox" [name]="beacons[item]['namespace']+beacons[item]['instance']+',security'" [checked]="beacons[item]['security']" (change)="updateView($event, item)" title="Použít beacon k zabezpečení">
+            <label [for]="beacons[item]['namespace']+beacons[item]['instance']+',security'" title="Použít beacon k zabezpečení"> Použít </label>
+          </span>
+        </div>
+      </ng-container>
+      <ng-template #typeElse>
+        <div class="beacons-col beacons-uuid">
+          <label [for]="beacons[item]['uuid']+'-'+beacons[item]['major']+'-'+beacons[item]['minor']+',uuid'"> UUID: </label>
+          <input style="width:230px" type="text" [name]="beacons[item]['uuid']+'-'+beacons[item]['major']+'-'+beacons[item]['minor']+',uuid'" [value]="beacons[item]['uuid']" (change)="checkField($event);updateView($event, item)">
+        </div>
+        <div class="beacons-col beacons-major">
+          <label [for]="beacons[item]['uuid']+'-'+beacons[item]['major']+'-'+beacons[item]['minor']+'-major'"> Major: </label>
+          <input style="width:60px" type="text" [name]="beacons[item]['uuid']+'-'+beacons[item]['major']+'-'+beacons[item]['minor']+',major'" [value]="beacons[item]['major']" (change)="checkField($event);updateView($event, item)">
+        </div>
+        <div class="beacons-col beacons-minor">
+          <label [for]="beacons[item]['uuid']+'-'+beacons[item]['major']+'-'+beacons[item]['minor']+'-minor'"> Minor: </label>
+          <input style="width:60px" type="text" [name]="beacons[item]['uuid']+'-'+beacons[item]['major']+'-'+beacons[item]['minor']+',minor'" [value]="beacons[item]['minor']" (change)="checkField($event);updateView($event, item)">
+        </div>
+        <div class="beacons-col beacons-activate">
+          <span>
+            <input type="checkbox" [name]="beacons[item]['uuid']+'-'+beacons[item]['major']+'-'+beacons[item]['minor']+',active'" [checked]="beacons[item]['active']" (change)="updateView($event, item)">
+            <label [for]="beacons[item]['uuid']+'-'+beacons[item]['major']+'-'+beacons[item]['minor']+',active'"> Aktivní </label>
+            <input type="checkbox" [name]="beacons[item]['uuid']+'-'+beacons[item]['major']+'-'+beacons[item]['minor']+',security'" [checked]="beacons[item]['security']" (change)="updateView($event, item)" title="Použít beacon k zabezpečení">
+            <label [for]="beacons[item]['uuid']+'-'+beacons[item]['major']+'-'+beacons[item]['minor']+',security'" title="Použít beacon k zabezpečení"> Použít </label>
+          </span>
+        </div>
+      </ng-template>
+      <div class="beacons-col beacons-remove">
+        <button class="beacons-button beacons-button-remove" (click)="removeBeacon(item)"> Odebrat </button>        
+      </div>
+    </li>
+  </ul>
+</div>
+<div class="settings-btn">
+  <button type="submit" class="settings-submit" (click)="_loginService.modifyAdvertisedBeacons(beacons)"> Změnit nastavení </button>
+</div>

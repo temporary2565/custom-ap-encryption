@@ -1,0 +1,62 @@
+<div class="wrapper connect-wrapper">
+  <div class="header connect-header">
+        <ng-container *ngIf="status$ | async as s"><div class="status-icon">
+          <div class="status-name-wrapper">
+              <div class="status-name-container">
+            <ng-container [ngSwitch]="s.state">
+              <ng-container *ngSwitchCase="0">
+                <img src="assets/cnBT.png" [width]="iconSize" [height]="iconSize">
+              </ng-container>
+              <ng-container *ngSwitchCase="1">
+                <img src="assets/cnWF.png" [width]="iconSize" [height]="iconSize">
+              </ng-container>
+              <ng-container *ngSwitchCase="2">
+                <img src="assets/cn.png" [width]="iconSize" [height]="iconSize">
+              </ng-container>
+              <ng-container *ngSwitchCase="3">
+                <img src="assets/cnN.png" [width]="iconSize" [height]="iconSize">
+              </ng-container>
+            </ng-container>
+        </div>
+        <span class="status-name">
+          <h4 *ngIf="s.state == 2">{{s.name}}</h4>
+          <h4 *ngIf="s.state == 3"> <i>Nepřipojeno</i> </h4>
+          <h4 *ngIf="s.state == 1"> <i>Připojování přes BLE ...</i> </h4>
+          <h4 *ngIf="s.state == 0"> <i>Připojobání přes Wifi ...</i> </h4>
+        </span>
+      </div>
+    </div>
+    <div class="status-info"><br><small *ngIf="s.state == 2">RSSI: {{s.rssi}}, MAC: {{s.mac}}</small></div>
+      <div class="status-buttons">
+        <button type="button" (click)="refresh()" *ngIf="s.state == 3"> <img src="assets/refresh.png" width="64" height="64"> </button>
+        <button type="button" (click)="disconnect()" *ngIf="s.state != 3"> <img src="assets/cancel.png" width="64" height="64"> </button>
+      </div>
+    </ng-container>
+  </div>
+  <div class="content connect">
+    <div class="array connect-list">
+      <div class="item connect-item" *ngFor="let item of availableArr;index as i">
+        <div class="connect-icon">
+          <ng-container [ngSwitch]="item.type">
+            <ng-container *ngSwitchCase="0">
+              <img src="assets/open.png" width="32" height="32">
+            </ng-container>
+            <ng-container *ngSwitchCase="1">
+              <img src="assets/open-pairing.png" width="35" height="32">
+            </ng-container>
+            <ng-container *ngSwitchCase="2">
+              <img src="assets/personal.png" width="35" height="32">
+            </ng-container>
+            <ng-container *ngSwitchCase="3">
+              <img src="assets/enterprise.png" width="24" height="32">
+            </ng-container>
+          </ng-container>
+        </div>
+        <div class="connect-name">{{item.name}}</div>
+        <div class="connect-info">{{item.info}}</div>
+        <div class="connect-actions">
+          <button *ngIf="!ipc.connected" type="button" (click)="connect(item)" title="Připojit"><img src="assets/connect.png" width="32" height="32"></button>
+        </div>
+      </div>
+    </div>
+  </div>

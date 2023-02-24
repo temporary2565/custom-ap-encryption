@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span style="cursor: pointer" [routerLink]="['']" routerLinkActive="router-link-active" skipLocationChange> Manufacturer </span>
+    <span class="spacer"></span>
+    <ng-container *ngIf="!_a.isLoggedIn;else loginElse">
+    
+    <button mat-flat-button routerLink="login" skipLocationChange color="secondary"><mat-icon>touch_app</mat-icon> Přihlásit se </button>
+  </ng-container>
+<ng-template #loginElse>
+    <button (click)="_a.deauth()" mat-raised-button routerLink="login" skipLocationChange color="secondary"><mat-icon>cancel</mat-icon> Odhlásit se </button>
+</ng-template></mat-toolbar-row>
+</mat-toolbar>
+<ng-container *ngIf="!_a.isLoggedIn;else landingElse">
+
+<router-outlet></router-outlet></ng-container>
+
+<ng-template #landingElse>
+  <app-management></app-management>
+</ng-template>

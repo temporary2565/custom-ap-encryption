@@ -1,0 +1,30 @@
+<div class="subbar-wrapper">
+    <div class="subbar">
+        <ul class="subbar-list">
+            <li class="subbar-item" *ngFor="let item of getSubcategoryStructure()" [class.hidden]="_structureService.isHidden(category, item)">
+              <a [ngClass]="{ 'subbar-link':true, 'active':isHighlighted(item) }" [title]="_structureService.appStructure[category]['children'][item]['desc']" (click)="highlight(item)">
+                {{ _structureService.appStructure[category]['children'][item]['label'] }}
+              </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="content-wrapper">
+  <ng-container *ngIf="_structureService.detectComponent(category, highlighted).is;then component;else form"></ng-container>
+  <ng-template #component>
+    <ng-container [ngSwitch]="_structureService.detectComponent(category, highlighted).component">
+      <ng-container *ngSwitchCase="'firmware'">
+        <app-firmware></app-firmware>
+      </ng-container>
+      <ng-container *ngSwitchCase="'scanner'">
+        <app-scanner></app-scanner>
+      </ng-container>
+      <ng-container *ngSwitchCase="'advertiser'">
+        <app-advertiser></app-advertiser>
+      </ng-container>
+    </ng-container>
+  </ng-template>
+  <ng-template #form>
+    <app-settings></app-settings>
+  </ng-template>
+</div>

@@ -1,0 +1,61 @@
+$color-darker: #08110f;
+$color-dark: #0d1b17;
+
+.saved-list-empty {
+    display: flex;
+    > span {
+        margin: auto;
+        font-style: italic
+
+    }
+    height: calc(100vh - 53px);
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.saved-list > li {
+    display: grid;
+    grid-template-columns: 50px auto 80px;
+    grid-template-rows: 1fr 1fr;
+    text-align: left !important;
+    grid-gap: 14px;
+    margin: 10px;
+    border-bottom: 2px solid #e0e0e0;
+    list-style: none;
+}
+
+.saved-list {
+    max-width: 520px;
+    margin: 0 auto;
+    margin-top: 16px;
+    height: calc(100vh - 182px);
+    overflow-y: auto;
+    background-color: $color-dark;
+}
+
+.saved-list-wrapper {
+    display: block !important;
+    background-color: $color-dark;
+}
+
+.saved-list-actions {
+    grid-column: 3;
+    grid-row: 1 /span 2 ;
+}
+
+.saved-list-info {
+    grid-column: 1 / span 2;
+    grid-row: 2;
+}
+.saved-list-info, .saved-list-actions, .saved-list-name {
+    margin: auto 0;
+}
+
+.saved-list-icon {
+    text-align: center;
+}
+
+.saved-list-info {
+    font-style: italic;
+}

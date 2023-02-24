@@ -1,0 +1,118 @@
+$background-wrapper: #475256;
+$background-list: #2f373a;
+$background-item: #475256;
+
+@mixin warning($_bg) {
+    background-color: $_bg;
+    color: #ccc;
+    padding: 16px;
+    margin: 8px;
+    display: block;
+    max-height: 45px;
+    opacity: 1;
+    transition: max-height .8s ease-out, opacity .8s ease-out, padding .8s ease-out;
+    box-sizing: border-box !important;
+}
+
+.beacons-error {
+    @include warning(#8f3b12);
+}
+
+.beacons-success {
+    @include warning(#117711)
+}
+
+.beacons-error.hidden, .beacons-success.hidden {
+    display: block !important;
+    overflow: hidden;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    opacity: 0;
+    transition: max-height .8s ease-in, opacity .8s ease-in, padding .8s ease-in;
+}
+
+.beacons-wrapper {
+    background-color: $background-wrapper;
+    margin-bottom: 16px;
+}
+
+.beacons-toolbar {
+    height:30px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    > h2 {
+        line-height: 24px;
+        font-size: 14pt;
+        padding: 3px;
+        box-sizing: border-box;
+    }
+    > .beacons-buttons {
+        text-align: right;
+        > .beacons-button {
+            margin: 3px;
+            padding: 3px;
+            border-radius: 0;
+            margin-right: 6px;
+        }
+    }
+}
+
+.beacons-list {
+    background-color: $background-list;
+    width: 100%;
+    padding: 8px;
+    min-height: 133px;
+    box-sizing: border-box;
+}
+
+.beacons-item {
+    display: grid;
+    grid-gap: 6px;
+    grid-template-columns: 125px 160px 105px 90px auto;
+    padding: 8px;
+    margin: 18px;
+    box-sizing: border-box;
+    background-color: $background-item;
+}
+.beacons-layout-ibeacon {
+    grid-template-columns: 125px 235px 65px 65px 90px auto !important;
+}
+
+.beacons-col {
+    display: grid;
+    grid-template-rows: 14px 23px; 
+    > label {
+        font-size: 12px;
+        font-style: italic;
+        text-indent: 5px;
+        display: block;
+    }
+}
+
+.beacons-notfound {
+    grid-column: 1 / span 4;
+    color: #adadad;
+    height: 127px;
+    font-style: italic;
+    display: flex;
+    > span {
+        margin: auto;
+    }
+}
+
+.beacons-remove {
+    display:flex;
+    flex-direction: row-reverse;
+    > .beacons-button-remove {
+        margin: auto 6px;
+        border-radius: 0;
+    }
+}
+
+.beacons-activate {
+    display: flex;
+    > span {
+        margin: auto 8px;
+    }
+}

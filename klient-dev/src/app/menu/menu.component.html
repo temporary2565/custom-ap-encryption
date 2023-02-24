@@ -1,0 +1,8 @@
+<div class="menu-wrapper">
+<ul class="menu">
+  <li><a routerLink="connect" title="Dostupné sitě" [class.highlighted]="router.url == '/' || router.url == '/connect'"><img src="assets/connect.png"></a></li>
+  <li><a routerLink="saved" title="Uložené" [class.highlighted]="router.url == '/saved'"><img src="assets/save.png"></a></li>
+  <li><a routerLink="account" title="Přihlášení" [class.highlighted]="router.url == '/account'"><img src="assets/account.png"></a></li>
+  <li><a routerLink="settings" title="Nastavení" [class.highlighted]="router.url == '/settings'"><img src="assets/settings.png"></a></li>
+  <li><a routerLink="about" title="O aplikace" [class.highlighted]="router.url == '/about'"><img src="assets/about.png"></a></li>
+</ul></div>

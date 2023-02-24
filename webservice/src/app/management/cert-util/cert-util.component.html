@@ -1,0 +1,64 @@
+<form [formGroup]="certForm" method="post" action="/secure">
+  <input type="hidden" name="session" formControlName="session">
+  <table class="modal-table">
+    <tr class="modal-row">
+      <td class="modal-cell modal-cell-label">
+        <label for="active">Povolit HTTPS</label>
+      </td><td class="modal-cell">
+        <input type="checkbox" name="active" formControlName="active" (change)="updateDisabled()">
+      </td>
+    </tr>
+    <tr class="modal-row">
+      <td class="modal-cell modal-cell-label">
+        <label for="httpsonly">Povolit pouze HTTPS</label>
+      </td><td class="modal-cell">
+        <input type="checkbox" name="httpsonly" formControlName="httpsonly">
+      </td>
+    </tr>
+    <tr class="modal-row">
+      <td class="modal-cell modal-cell-label">
+        <label for="selfsigned">Použít certifikát</label>
+      </td><td class="modal-cell">
+        <select name="selfsigned" formControlName="selfsigned" (change)="updateDisabled()">
+          <option value="true"> Self-signed </option>
+          <option value="false"> Nahrát vlastní </option>
+        </select>
+      </td>
+    </tr>
+    <tr class="modal-row">
+      <td class="modal-cell modal-cell-label">
+        <label for="file">Soubor s klíčem (DER/PEM) </label>
+      </td><td class="modal-cell">
+        <input type="file" name="key" formControlName="key" (change)="onFileChange($event)">
+      </td>
+    </tr>
+    <tr class="modal-row">
+      <td class="modal-cell modal-cell-label">
+        <label for="file">Poskytnutý certifikát (PEM) </label>
+      </td><td class="modal-cell">
+        <input type="file" name="cert" formControlName="cert" (change)="onFileChange($event)">
+      </td>
+    </tr>
+    <tr class="modal-row">
+      <td class="modal-cell modal-cell-label">
+        <label for="hsts">HSTS</label>
+      </td><td class="modal-cell">
+        <input type="checkbox" name="hsts" formControlName="hsts">
+      </td>
+    </tr>
+    <tr class="modal-row">
+      <td class="modal-cell modal-cell-label">
+        <label for="hpkp">HPKP</label>
+      </td><td class="modal-cell">
+        <input type="checkbox" name="hpkp" formControlName="hpkp" (change)="updateDisabled()">
+      </td>
+    </tr>
+    <tr class="modal-row">
+      <td class="modal-cell modal-cell-label">
+        <label for="hpkp">SHA256 vašeho certifikátu (v base64)</label>
+      </td><td class="modal-cell">
+        <input type="text" name="hpkp_hash" formControlName="hpkp_hash">
+      </td>
+    </tr>
+  </table>
+</form>

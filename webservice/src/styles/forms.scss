@@ -1,0 +1,85 @@
+.settings-table {
+  width: 100%;
+  color: $color;
+  padding:12px;
+}
+
+// Zvýraznění lichých řádků
+.settings-row-even {
+    background-color: $form-even-bg;
+}
+// Buňky s nastavením budou mít menší padding 
+.settings-input-cell {
+  padding: 4px;
+  width: 180px;
+}
+.settings-label, .settings-range-cell {
+  padding: 2px;
+  padding-top: 6px;
+}
+.settings-range-span {
+  font-size: 10pt;
+  color: #d65d5d;
+  font-style: italic;
+}
+
+
+.settings-submit {
+  margin: 20px;
+}
+
+.settings-btn {
+  text-align:center;
+}
+
+input, select {
+  color: $color;
+}
+
+input[type="text"], input[type="password"], select {
+  margin-left: 2px;
+  text-indent: 0.2em;
+  margin-bottom: 6px;
+  height: 23px;
+  width: 180px;
+  line-height: 23px \9;
+  font-size: 14px;
+  font-family: Lucida Console;
+  background-color: #576D73;
+  border-color: #888;
+  padding: 1px;
+  border-width: 1px;
+  border-style: inset;
+  box-sizing: border-box;
+  transition: $transition;
+}
+
+.invalid {
+  background-color: #42555a !important;
+  outline: 2px solid #7a3232 !important;
+}
+
+button {
+  outline:0;
+  border:0;
+  border-radius: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+button:disabled {
+  opacity: 0.8;
+}
+
+.settings-label {
+  width: $form-label-width;
+}
+
+.settings-array-button {
+  padding: 6px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 8px;
+}

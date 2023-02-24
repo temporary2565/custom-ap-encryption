@@ -1,0 +1,130 @@
+@import 'theme.scss';
+
+.modal {
+    display: flex;
+    box-sizing: border-box;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.295);
+}
+
+.modal-content {
+    text-align: left;
+}
+
+.modal-dialog {
+    margin: auto;
+    background-color: $modal-bg;
+    color: $modal-color;
+    max-width: 600px;
+    max-height: 450px;
+    width: 90%;
+    height: 90%;
+    overflow: auto;
+}
+
+.modal-body {
+    box-sizing: border-box;
+    margin: 8px;
+    background-color: $modal-content-bg;
+}
+
+.modal-title {
+    font-size: 16pt;
+    line-height: 30px;
+    padding-left: 16px;
+    padding-top: 8px;
+}
+
+.modal-footer {
+    box-sizing: border-box;
+    text-align: center;
+    padding: 16px;
+    > .btn {
+        padding-left: 6px;
+        padding-right: 6px;
+        margin-left: 12px;
+        margin-right: 12px;
+    }
+}
+
+.modal-table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.modal-cell {
+    padding: 0;
+    height: 34px;
+    box-sizing: border-box;
+    > select {
+        margin: 0;
+    }
+}
+.modal-row {
+    border: 2px solid $modal-bg;
+}
+
+.modal-cell-label {
+    padding: 6px;
+    display: flex;
+    > label {
+        margin: auto 6px;
+    }
+}
+
+
+.emc-list {
+    display: block;
+    overflow-y: auto;
+    overflow-x: unset;
+    box-sizing: border-box;
+    width: 100%;
+    height: 228px;
+    padding: 16px;
+    margin-top: 0;
+}
+.emc-item {
+    display: grid;
+    box-sizing: border-box;
+    grid-template-columns: auto 100px;
+    width: calc(100% - 40px);
+    grid-gap: 6px;
+    padding: 4px;
+    > .emc-key {
+        word-break: break-all;
+        display: block;
+    }
+}
+.emc-key-delete {
+    display: flex;
+    > .emc-key-delete-button {
+        margin: auto;
+    }
+}
+.emc-list-empty {
+    display: flex;
+    box-sizing: border-box;
+    width: 584px;
+    height: 228px;
+    > span {
+        margin: auto;
+        color: $color;
+    }
+}
+.emc-entry {
+    display: grid;
+    box-sizing: border-box;
+    grid-template-columns: 1.4fr 3fr;
+    margin: 16px;
+    padding-top:8px;
+    margin-bottom: 0;
+}
+.emc-list-controls {
+    margin: 16px;
+    margin-bottom: 8px;
+}

@@ -1,0 +1,132 @@
+/* You can add global styles to this file, and also import other style files */
+@import './styles/theme.scss';
+@import './styles/modal.scss';
+@import './styles/reset.css';
+@import './styles/tmp.scss';
+@import './styles/forms.scss';
+@import './styles/networkmap.scss';
+
+body, html, a, div, span, li, ul, table, tr, td, input, button {
+  box-sizing: border-box;
+}
+body, html {
+  height:100%;
+}
+body {
+  background-color: $bg;
+  background-image: url('assets/bg.jpg');
+  background-size: cover; 
+  font-family: "Arial";
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+  color: $color;
+  cursor: default;
+}
+.hidden {
+  display:none !important;
+}
+
+
+.page-wrapper {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.page-container {
+  background-color: $container-bg;
+  width: $container-width;
+  margin: 0 auto 0 auto;
+  padding-bottom: 8px;
+}
+
+.navbar-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.navbar-link {
+  margin: 25px;
+  list-style:none;
+  display:grid;
+  grid-template-rows: repeat(2, auto);
+  color: #fff;
+  text-decoration: none;
+  opacity: 0.6;
+  transition: opacity $transition;
+}
+.navbar-link .active, .navbar-link:hover {
+  opacity: 0.9;
+}
+.navbar-img {
+  text-align:center;
+  margin-bottom: 12px;
+}
+.navbar-label {
+  text-align:center;
+}
+.navbar-logout {
+  display:grid;
+  text-align:right;
+  grid-gap:6px;
+  grid-template-columns: auto 35px 130px;
+  max-height:56px;
+  > a {
+    display: inline-block;
+    position: relative;
+    top: 13px;
+    right: 15px;
+    color: $color;
+    text-decoration: none;
+    opacity: 0.8;
+    grid-column: 3;
+  }
+  > a:hover {
+    opacity: 0.9;
+  }
+  > app-notifier {
+    position: relative;
+    top: 13px;
+    right: 15px;
+    grid-column: 2;
+  }
+  margin: 7px;
+}
+
+.subbar {
+  padding: 20px;
+  border-top: $subbar-border;
+}
+.subbar-list {
+  display:inline-flex;
+}
+.subbar-item {
+  list-style: none;
+  padding-left: $subbar-link-padding;
+  padding-right: $subbar-link-padding;
+}
+.subbar-link {
+  display: inline-block;
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: bold !important;
+  text-decoration: none;
+  transition: opacity $transition;
+  opacity: 0.6;
+}
+.subbar-link:hover {
+  opacity: 0.9;
+}
+.active {
+  color: $subbar-link-active;
+  opacity: 0.9 !important;
+}
+
+.content-wrapper {
+  box-sizing: border-box;
+  margin: 30px;
+  margin-top: 0;
+  padding: 25px;
+  background-color: $content-bg;
+}
+.content-heading {
+  color: $color;
+  font-size: 40px;
+}

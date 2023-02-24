@@ -1,0 +1,26 @@
+.overlay-wrapper {
+    z-index: 2;
+    position: absolute;
+    top: 0;left: 0;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    padding: 8px;
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+}
+
+.overlay {
+    margin: auto;
+    max-width: 60%;
+    text-align: center;
+}
+.overlay-form-field {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+.overlay-action {
+    margin: 4px;
+}

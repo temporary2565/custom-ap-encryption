@@ -1,0 +1,11 @@
+<div class="page-wrapper">
+    <div class="page-container">
+        <app-login *ngIf="!_loginService.authenticated"></app-login>
+        <div *ngIf="_loginService.authenticated">
+            <app-navigation></app-navigation>
+            <div class="subcategory">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>

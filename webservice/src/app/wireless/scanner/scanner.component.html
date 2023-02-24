@@ -1,0 +1,19 @@
+<h1 class="content-heading"> Beacony používané zabezpečením "Projekt" </h1>
+<hr class="content-separator">
+<div class="beacons-wrapper" *ngIf="_loginService.hasBeacons && _loginService.hasSavedBeacons;else notBeacons">
+  <div class="beacons-toolbar">
+    <h2> Přidat nové zařízení </h2>
+  </div>
+  <app-scan></app-scan>
+</div>
+
+<div class="beacons-wrapper" *ngIf="_loginService.hasSavedBeacons">
+  <div class="beacons-toolbar">
+    <h2> Uložená zařízení </h2>
+  </div>
+  <app-saved></app-saved>
+</div>
+
+<ng-template #notBeacons>
+  <div class="redtext"> Zatím se nepodařilo načíst informace o beaconech ze serveru, prosím čekejte </div>
+</ng-template>

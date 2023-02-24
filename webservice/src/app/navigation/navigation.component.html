@@ -1,0 +1,14 @@
+<div class="navbar">
+  <span class="navbar-logout">
+    <app-notifier></app-notifier>
+    <a href="javascript:alert('Byli jste odhlášeni!')" (click)="_loginService.removeSessionId()"> Odhlásit se &minus;&gt; </a>
+  </span>
+  <ul class="navbar-list">
+    <li class="navbar-item" *ngFor="let item of categoryStructure" id="navbar-item-{{item}}">
+      <a [ngClass]="{ 'navbar-link':true, 'active':isHighlighted(item) }" id="navbar-link-{{item}}" routerLink="subbar" (click)="highlight(item)" skipLocationChange [title]="appStructure[item]['desc']">
+        <div class="navbar-img"><img [src]="appStructure[item]['img']" [width]="iconSize" [height]="iconSize"></div>
+        <div class="navbar-label">{{appStructure[item]['label']}}</div>
+      </a>
+    </li>
+  </ul>
+</div>

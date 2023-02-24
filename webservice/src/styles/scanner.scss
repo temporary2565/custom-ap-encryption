@@ -1,0 +1,96 @@
+$background-wrapper: #475256;
+$background-list: #2f373a;
+$background-item: #475256;
+
+.beacons-wrapper {
+    background-color: $background-wrapper;
+    margin-bottom: 16px;
+}
+
+.beacons-toolbar {
+    height:30px;
+    > h2 {
+        line-height: 24px;
+        font-size: 14pt;
+        padding: 3px;
+        box-sizing: border-box;
+    }
+}
+
+.beacons-list {
+    background-color: $background-list;
+    overflow:hidden;
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 14px;
+    padding: 14px;
+    box-sizing: border-box;
+}
+
+.beacons-item {
+    background-color: $background-item;
+    display: grid;
+    grid-template-rows: 16pt 56px 14pt 65px 30px;
+    text-align: center;
+}
+
+.beacons-notfound {
+    grid-column: 1 / span 4;
+    color: #adadad;
+    height: 180px;
+    font-style: italic;
+    display: flex;
+    > span {
+        margin: auto;
+    }
+}
+
+.beacons-properties {
+    line-height: 14px;
+    font-size: 10pt;
+    font-style: italic;
+    > .beacons-uuid {
+        font-size: 7pt;
+        font-style: normal;
+    }
+}
+
+.beacons-icon {
+    padding-top: 8px;
+    box-sizing:border-box;
+}
+
+.beacons-button {
+    border-radius: 0 !important;
+}
+
+.beacons-button-disabled {
+    color: #212729;
+    background-color: #949494;
+    text-rendering: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    font-size: 12px;
+    font-style: italic;
+}
+
+.beacons-subitem {
+    padding-top: 3px;
+    box-sizing: border-box;
+}
+
+// Tyto třídy označují přibližnou vzdálenost beaconu
+.proximity-far {
+    background-color: #692d0b;
+}
+.proximity-near {
+    background-color: #0b3c69;
+}
+.proximity-immediate {
+    background-color: #14610d;
+}
+.proximity-unknown {
+    background-color: #212729;
+}

@@ -1,0 +1,53 @@
+.login-caption {
+    font-size: 20pt;
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 16px;
+}
+
+.login-cold {
+    > span {
+        > input[type=checkbox]{
+            height: 0;
+            width: 0;
+            visibility: hidden;
+        }
+        
+        > label {
+            cursor: pointer;
+            text-indent: -9999px;
+            width: 32px;
+            height: 16px;
+            background: rgb(44, 75, 62);
+            display: inline-block;
+            border-radius: 20px;
+            position: relative;
+        }
+        
+        > label:after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 5px;
+            width: 10px;
+            height: 10px;
+            background: #fff;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+        
+        > input:checked + label {
+            background: #328170;
+        }
+        
+        > input:checked + label:after {
+            left: calc(100% - 5px);
+            transform: translateX(-100%);
+        }
+        
+        > label:active:after {
+            width: 26px;
+        }
+    }
+}

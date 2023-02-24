@@ -1,0 +1,30 @@
+<div class="emc-wrapper">
+  <div class="emc-entry">
+    <div class="emc-entry-label">
+      <label for="internalApiKey"> Povolit interní API klíč </label>
+    </div>
+    <div class="emc-entry-entry-input">
+      <input type="checkbox" name="internalApiKey">
+    </div>
+  </div>
+  <div class="emc-list-controls">
+    <button class="emc-list-control-button" (click)="_loginService.addAPIKey()"> Nový klíč </button>
+  </div>
+  <ul class="emc-list" *ngIf="_loginService.apiKeys.length > 0;else emclistelse">
+    <ng-cotainer *ngFor="let key of _loginService.apiKeys;index as i">
+      <li *ngIf="_loginService.apiKeys.includes(key)" class="emc-item">
+        <span class="emc-key"> {{key}} </span>
+        <div class="emc-key-delete">
+          <button class="emc-key-delete-button" (click)="delete(key)">
+            Deaktivovat
+          </button>
+        </div>
+      </li>
+    </ng-cotainer>
+  </ul>
+  <ng-template #emclistelse>
+    <div class="emc-list-empty">
+      <span> Zatím nebyly přidány žádné klíče </span>
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,25 @@
+<div class="nofifier">
+    <div class="notifier-menu-wrapper">
+      <div class="notifier-menu" *ngIf="arr.length > 0;else arrelse">
+        <ng-container *ngFor="let item of arr;index as i">
+          <div class="notifier-item" id="notifier-item-{{i}}">
+            <div class="notifier-img-container"> <img src="assets/device.png" [width]="iconSize" [height]="iconSize" class="notifier-img"> </div>
+            <div class="notifier-name"> {{item.name}} </div>
+            <div class="notifier-message"> {{item.message}} </div>
+            <div class="notifier-buttons" *ngIf="item.status == 'requested'">
+              <a (click)="_notificationService.accept(item)" class="notifier-button notifier-button-green"> <span>Accept</span> </a>
+              <a (click)="_notificationService.reject(item)" class="notifier-button"> <span>Reject</span> </a>
+            </div>
+            <div class="notifier-button-single" *ngIf="item.status == 'paired'">
+                <a (click)="_notificationService.delete(item)" class="notifier-button"> <span>Revoke</span> </a>
+              </div>
+          </div>
+        </ng-container>
+      </div>
+      <ng-template #arrelse>
+        <div class="notifier-err">
+          <span> Žádné požadavky o párování </span>
+        </div>
+      </ng-template>
+    </div>
+  </div>

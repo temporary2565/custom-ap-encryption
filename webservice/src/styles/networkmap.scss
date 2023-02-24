@@ -1,0 +1,62 @@
+@import './theme.scss';
+
+.link-status {
+  display: inline-block;
+  padding-top: 0;
+  margin-bottom: 5px;
+  text-decoration: none;
+  color: $color;
+}
+
+.connection-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    margin-bottom: 40px;
+}
+.connection-item, .security-item {
+  text-align: center;
+}
+.connection-label, .security-label {
+  display: block;
+}
+.connection-wire {
+  background-image: url('assets/wire.png');
+  background-size: 100% 100%;
+  opacity: 0.8;
+}
+.connection-wire-disabled {
+  background-image: url('assets/wire-disabled.png');
+  opacity: 0.6;
+}
+
+.security-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: 40px;
+}
+.security-warning {
+  display: inline-block;
+  font-style: italic;
+  font-size: 12pt;
+  color: gray;
+  padding: 0;
+  margin: 0;
+}
+
+.usage-table {
+  width: 100%;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+.usage-label {
+  font-weight: bold;
+  font-size: 16pt;
+}
+.usage-cell, .usage-label {
+  border: 1px solid silver;
+  outline: 1px solid white;
+  padding: 6px;
+}
+.usage-label-cell {
+  width: $form-label-width;
+}

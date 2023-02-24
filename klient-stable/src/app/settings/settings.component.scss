@@ -1,0 +1,42 @@
+.field-wrapper {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    grid-gap: 6px;
+    margin-bottom: 4px;
+    max-width: 420px;
+    > span> input[type="text"], select {
+        width: 80%;
+    }
+    >span>select {
+        width:85%;
+    }
+    > label {
+        margin: auto 0;
+        text-align: left;
+    }
+}
+.settings {
+    width: 450px;
+}
+
+.section-caption {
+    font-size: 20pt;
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 8px;
+    margin-top: 16px;
+
+}
+
+.section-desc {
+    font-size: 13pt;
+    display: block;
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.actions {
+    margin-top: 20px;
+    margin-bottom: 12px;
+}

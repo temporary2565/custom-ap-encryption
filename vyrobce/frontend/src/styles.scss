@@ -1,0 +1,44 @@
+@import '~material-icons/iconfont/material-icons.css';
+@import '../node_modules/roboto-fontface/css/roboto/roboto-fontface.css';
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+body, html {
+    margin: 0;
+    padding:0 ;
+    height: 100%;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+body {
+    background: url('assets/bg.jpg')
+    ;font-family: 'Roboto', Arial, Helvetica, sans-serif !important;
+}
+
+.login-wrapper {
+    display: flex;width:100%;margin: 60px;box-sizing: border-box;margin-left:0;margin-right:0;
+}
+
+.login {
+    margin: auto;width:300px;
+    box-sizing: content-box;text-align: center
+}
+
+input[type="text"] {
+    margin: 12px;
+    box-sizing: border-box;width: calc(100% );
+}
+
+.alert {
+    display:block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+}
+
+.landing-wrapper {display:flex;margin:20px;width:100%;box-sizing: border-box;margin-left:0;margin-right:0;}
+.landing {margin: auto; width: 600px;text-align: center}
+.logo {font-family: Arial, Helvetica, sans-serif;letter-spacing: 4px;font-size:40px; font-weight: normal;
+color:white;}

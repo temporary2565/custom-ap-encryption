@@ -1,0 +1,34 @@
+@import "theme.scss";
+button {
+    border-radius: 0;
+    border: 3px solid transparent;
+    padding: 4px 8px 4px 8px !important;
+    background: $color-primary;
+    outline: none !important;
+    color: $app-fg;
+}
+
+button:hover, button:focus {
+    background: $color-primary-focus;
+    border: $color-primary-border-focus;
+}
+
+button:active {
+    background: $color-primary-click;
+    border: $color-primary-border-click;
+}
+
+
+input[type="text"] {
+    border-radius: 0;
+    padding: 2px 4px 2px 4px !important;
+    background: $color-primary;
+    border: $color-primary-border-focus;
+    outline: none !important;
+    color: $app-fg;
+}
+
+input[type="text"]:focus {
+        background: $color-primary-focus;
+        border: $color-primary-border-click;
+}

@@ -1,0 +1,42 @@
+<a class="link-status" routerLink="" skipLocationChange> &lt;&minus; Zpět na úvodní stránku </a>
+<h1 class="content-heading"> Aktualizace firmwaru </h1>
+<hr class="content-separator">
+<!-- Formulář k aktualizaci firmwaru -->
+<form ngNoForm class="content-form" method="get" action="/update">
+<input type="hidden" name="session" [value]="_loginService._sessionId">
+<table class="content-table">
+  <tr>
+    <td class="settings-cell settings-label">
+      Poslední aktualizace:
+    </td>
+    <td class="settings-cell settings-input-cell">
+      {{ (this._loginService.status["updates"]["updated"] != 'never') ? this._loginService.status["updates"]["updated"] : "Není známa" }}
+      <!-- {{ (typeof _loginService.status["updates"]["updated"] != 'undefined') ? _loginService.status["updates"]["updated"] : "Není známa" }} -->
+    </td>
+  </tr>
+  <tr>
+    <td class="settings-cell settings-label">
+      Dostupné aktualizace:
+    </td>
+    <td class="settings-cell settings-input-cell">
+       {{ (_loginService.status["updates"]["available"] > 2) ? _loginService.status["updates"]["available"] : "Žádné" }}
+    </td>
+  </tr>
+  <tr>
+    <td class="settings-cell settings-label">
+      Sestava jádra:
+    </td>
+    <td class="settings-cell settings-input-cell">
+        {{ (_loginService.status["updates"]["version"] != 'undefined') ? _loginService.status["updates"]["version"] : "Není známo" }}
+    </td>
+  </tr>
+  <tr>
+    <td class="settings-cell settings-label">
+      Aktualizovat systém:
+    </td>
+    <td class="settings-cell settings-input-cell">
+      <button type="submit"> Aktualizovat </button>
+    </td>
+  </tr>
+</table>
+</form>

@@ -1,0 +1,54 @@
+.login-logo {
+    width: 444px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 80px 350px;
+    grid-gap: 14px;
+    margin-bottom: 40px;
+}
+
+.login-logo-heading {
+    font-size: 60px;
+    line-height: 60px;
+    margin:auto 0;
+    opacity: 0.8;
+    width: 350px;
+}
+
+.login-wrapper {
+    padding: 60px;
+}
+
+.login-container {
+    width: 260px;
+    margin: 0 auto;
+}
+
+.login-heading {
+    font-size: 18pt;
+    margin-bottom: 10px;
+}
+
+.login-grid {
+    display: grid;
+    grid-template-columns: 70px auto;
+}
+
+.login-label, .login-textfield {
+    height:30px;
+    font-size: 13pt;
+}
+
+.login-label {
+    padding-top: (30px - 13pt) / 2;
+}
+
+.login-textfield {
+    padding-top: (30px - 13pt - 4px) / 2
+}
+
+.login-button {
+    grid-column: 1 / span 2;
+    width:120px;
+    margin: 10px auto;
+}

@@ -1,0 +1,36 @@
+<ng-container *ngIf="ipc.overlay || ipc.error">
+<div class="overlay-wrapper">
+  <div class="overlay">
+    <div [ngSwitch]="ipc.overlayType">
+      <div *ngSwitchCase="'error'">
+
+      </div>
+      <div *ngSwitchCase="'personal'">
+        <form [formGroup]="personalForm" onsubmit="return false;">
+        <div class="overlay-form-field">
+          <label for="password">Heslo k síti {{ipc.ssid}}:</label>
+          <input type="text" formControlName="password" name="password">
+        </div>
+        <div class="overlay-actions">
+          <button class="overlay-action" (click)="connect()">Připojit</button>
+          <button class="overlay-action" (click)="ipc.closeOverlay()">Zrušit</button>
+        </div>
+        </form>
+      </div>
+      <div *ngSwitchCase="'enterprise'">
+          <form [formGroup]="enterpriseForm" onsubmit="return false;">
+              <div class="overlay-form-field">
+                <label for="password">Heslo k síti {{ipc.ssid}} (firemní):</label>
+                <input type="text" formControlName="password" name="password">
+              </div>
+              <div class="overlay-actions">
+                <button class="overlay-action" (click)="connectEnterprise()">Připojit</button>
+                <button class="overlay-action" (click)="closeOverlay()">Zrušit</button>
+              </div>
+              </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+</ng-container>

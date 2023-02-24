@@ -1,0 +1,22 @@
+<div class="login-wrapper">
+  <div class="login-logo">
+    <img class="login-logo-image" src="assets/logo.png" width="80" height="68">
+    <h1 class="login-logo-heading"> Access Point </h1>
+  </div>
+  <div class="login-container">
+    <form>
+      <h2 class="login-heading"> Přihlášení </h2>
+      <div class="login-grid">
+        <label class="login-label" for="username"> Uživatel: </label>
+        <div class="login-textfield">
+          <input type="text" ngModel name="username" #username="ngModel">
+        </div>
+        <label class="login-label" for="password"> Heslo: </label>
+        <div class="login-textfield">
+          <input type="password" ngModel name="password"  #password="ngModel">
+        </div>
+        <button class="login-button" type="button" (click)="_loginService.getSessionId(username.value, password.value)"> Přihlásit se </button>
+      </div>
+    </form>
+  </div>
+</div>
